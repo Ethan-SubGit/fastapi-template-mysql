@@ -1,0 +1,41 @@
+2024-11-01 20:12:27,626 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-11-01 20:12:27,626 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-11-01 20:12:27,637 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-11-01 20:12:27,637 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-11-01 20:12:27,644 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-11-01 20:12:27,645 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-11-01 20:12:27,739 - sqlalchemy.engine.Engine - INFO - SELECT DATABASE()
+2024-11-01 20:12:27,739 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-11-01 20:12:27,752 - sqlalchemy.engine.Engine - INFO - SELECT @@sql_mode
+2024-11-01 20:12:27,752 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-11-01 20:12:27,758 - sqlalchemy.engine.Engine - INFO - SELECT @@lower_case_table_names
+2024-11-01 20:12:27,758 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-11-01 20:12:27,770 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-11-01 20:12:27,771 - sqlalchemy.engine.Engine - INFO - DESCRIBE `study_db`.`users`
+2024-11-01 20:12:27,771 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2024-11-01 20:12:27,780 - sqlalchemy.engine.Engine - INFO - COMMIT
+2024-11-01 20:12:39,503 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-11-01 20:12:39,509 - sqlalchemy.engine.Engine - INFO - SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.hashed_password AS users_hashed_password, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2024-11-01 20:12:39,509 - sqlalchemy.engine.Engine - INFO - [generated in 0.00034s] {'email_1': 'admin@mail.com', 'param_1': 1}
+2024-11-01 20:12:39,800 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-11-01 20:14:15,348 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-11-01 20:14:15,349 - sqlalchemy.engine.Engine - INFO - SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.hashed_password AS users_hashed_password, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2024-11-01 20:14:15,349 - sqlalchemy.engine.Engine - INFO - [cached since 95.84s ago] {'email_1': 'admin@mail.com', 'param_1': 1}
+2024-11-01 20:14:15,599 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2024-11-01 20:14:45,469 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2024-11-01 20:14:45,470 - sqlalchemy.engine.Engine - INFO - SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.hashed_password AS users_hashed_password, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2024-11-01 20:14:45,470 - sqlalchemy.engine.Engine - INFO - [cached since 126s ago] {'email_1': 'admin@mail.com', 'param_1': 1}
+2024-11-01 20:14:45,478 - sqlalchemy.engine.Engine - INFO - SELECT users.id AS users_id, users.email AS users_email, users.name AS users_name, users.hashed_password AS users_hashed_password, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+ LIMIT %(param_1)s, %(param_2)s
+2024-11-01 20:14:45,478 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] {'param_1': 0, 'param_2': 100}
+2024-11-01 20:14:45,487 - sqlalchemy.engine.Engine - INFO - ROLLBACK
