@@ -1,0 +1,19 @@
+Generic single-database configuration.
+'''
+# 개발 환경
+./run.sh development
+
+# 스테이징 환경
+./run.sh staging
+
+# 프로덕션 환경
+./run.sh production
+'''
+
+'''
+# alembic 마이그레이션 파일 생성
+alembic revision --autogenerate -m "Add hashed_password column"
+
+# 마이그레이션 실행
+alembic upgrade head
+'''
