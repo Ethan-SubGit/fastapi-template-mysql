@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     DATABASE_URL: str
     API_V1_STR: str = "/api/v1"
-    SECRET_KEY: str = "your-secret-key-here"  # 실제 운영환경에서는 안전한 키로 변경
+    SECRET_KEY: str = "c8e916d5f7a7afe4f9d2f6b1c3a4d5e8b7f9c2e5d8a1b4f7c0e3d6a9b2f5c8e"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
