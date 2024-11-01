@@ -7,7 +7,7 @@ class UserBase(BaseModel):
     name: str
 
 class UserCreate(UserBase):
-    password: constr(min_length=8)
+    password: constr(min_length=4)
 
 class UserLogin(BaseModel):
     email: EmailStr

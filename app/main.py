@@ -1,30 +1,29 @@
 from fastapi import FastAPI
 from app.core.config import settings
-from app.api.v1 import user
-from app.core.database import Base, engine
+from app.api.v1 import user, question
+from app.core.database import init_db
 
-def create_app() -> FastAPI:
-    # 환경별 설정
-    app = FastAPI(
-        title="FastAPI App",
-        description="FastAPI Application with environment configurations",
-        version="1.0.0",
-        debug=settings.DEBUG
-    )
+app = FastAPI(
+    title="FastAPI App",
+    description="FastAPI Application with JWT authentication",
+    version="1.0.0"
+)
 
-    # 데이터베이스 테이블 생성 (개발 환경에서만)
+@app.on_event("startup")
+async def startup_event():
+    # 개발 환경에서만 데이터베이스 초기화
     if settings.ENV != "production":
-        Base.metadata.create_all(bind=engine)
+        print("데이터베이스 초기화 중...")
+        # DB table을 계속 새로 생성하는거 중지
+        # await init_db()
 
-    # API 라우터 등록
-    app.include_router(user.router, prefix=settings.API_V1_STR)
-
-    return app
-
-app = create_app()
+app.include_router(user.router, prefix=settings.API_V1_STR)
+app.include_router(question.router, prefix=settings.API_V1_STR)
 
 @app.get("/health")
 async def health_check():
+    
+
     return {
         "status": "healthy",
         "environment": settings.ENV

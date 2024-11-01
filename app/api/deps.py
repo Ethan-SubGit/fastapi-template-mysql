@@ -1,15 +1,17 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from jose import JWTError, jwt
+from app.core.config import settings
 from app.core.database import get_db
-from app.core.security import verify_token
+from app.schemas.token import TokenData
 from app.services.user_service import UserService
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/login")
 
 async def get_current_user(
     token: str = Depends(oauth2_scheme),
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -17,11 +19,20 @@ async def get_current_user(
         headers={"WWW-Authenticate": "Bearer"},
     )
     
-    token_data = verify_token(token)
-    if token_data is None:
+    try:
+        payload = jwt.decode(
+            token, 
+            settings.SECRET_KEY, 
+            algorithms=[settings.ALGORITHM]
+        )
+        email: str = payload.get("sub")
+        if email is None:
+            raise credentials_exception
+        token_data = TokenData(email=email)
+    except JWTError:
         raise credentials_exception
-    
-    user = UserService.get_user_by_email(db, email=token_data.email)
+        
+    user = await UserService.get_user_by_email(db, email=token_data.email)
     if user is None:
         raise credentials_exception
-    return user 
+    return user
